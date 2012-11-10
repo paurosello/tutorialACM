@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'acmtut.views.home', name='home'),
+    url(r'^$', 'encuestas.views.inicio', name='inicio'),
     # url(r'^acmtut/', include('acmtut.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
