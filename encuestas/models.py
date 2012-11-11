@@ -3,9 +3,10 @@ from django.contrib import admin
 from django.template.defaultfilters import slugify
 
 class Votacion(models.Model):
-    titulo = models.CharField(max_length=150, primary_key=True)
-    activa = models.BooleanField()
+    titulo = models.CharField(max_length=150)
+    activa = models.BooleanField(default=True)
     fecha = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(blank=True)
 
     def __unicode__(self):
         return self.titulo
@@ -22,6 +23,7 @@ class Voto(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.votacion + " " + self.opcion
+
+        return self.votacion.titulo + " " + str(self.opcion)
 
 admin.site.register(Voto)
