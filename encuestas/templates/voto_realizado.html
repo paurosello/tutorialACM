@@ -1,0 +1,14 @@
+{% extends "portada.html" %}
+
+{% block contenido %}
+
+    <h2> Has votado
+        {% if voto.opcion == 1 %}
+            a favor.
+        {% else %}
+            en contra.
+        {% endif %}
+    </h2>
+
+    <hr>
+{% endblock %}

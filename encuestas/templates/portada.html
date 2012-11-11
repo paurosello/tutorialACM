@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Le styles -->
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 20px;
@@ -21,6 +21,12 @@
         }
         .container-narrow > hr {
             margin: 30px 0;
+        }
+
+        .votacion{
+            background: rgba(0, 161, 110, 0.18);
+            border-radius: 4px;
+            padding: 10px;
         }
     </style>
     <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -38,8 +44,9 @@
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
             <li><a href="/">Inicio</a></li>
+            <li><a href="/activas">Activas</a></li>
         </ul>
-        <h3 class="muted">Votaciones</h3>
+        <h3 class="muted"><a href="/">Votaciones</a></h3>
     </div>
 
     <hr>
@@ -48,13 +55,33 @@
 
         {% block contenido %}
 
-            <h1 style="text-align: center">ACM</h1>
+            {% if nvotaciones > 0 %}
+                <h2 style="text-align: center">Hay {{ nvotaciones }} votación activa</h2>
+                <hr>
+            {% elif nvotaciones %}
+                <h2 style="text-align: center">Hay {{ nvotaciones }} votaciones activas</h2>
+                <hr>
+            {% endif %}
+
+            {%  for votacion in votaciones %}
+                <div class="votacion">
+                    <h1  style="text-align: center"> <a href="/votacion/{{ votacion.pk }}">{{  votacion.titulo }}</a></h1>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <a class="btn btn-large btn-block btn-primary" type="button" href="/votar/{{ votacion.pk }}/1">Si</a>
+                         </div>
+                        <div class="span6">
+                            <a class="btn btn-large btn-block btn-danger" type="button" href="/votar/{{ votacion.pk }}/0">No</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {%  endfor %}
 
         {% endblock %}
 
     </div>
 
-    <hr>
 
     <div class="footer">
         <p>ACM - Pau Rosello - 2012</p>
@@ -65,7 +92,7 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+<script src="/static/bootstrap/js/bootstrap.js"></script>
 
 
 </body>

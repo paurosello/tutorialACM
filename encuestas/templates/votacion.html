@@ -1,0 +1,26 @@
+{% extends "portada.html" %}
+
+{% block contenido %}
+    <style>
+        .cnt > h2,.cnt > h3, .hero-unit >h2, .span6 > h3{
+            text-align: center;
+        }
+    </style>
+
+    <div class="cnt">
+        <div class="hero-unit">
+            <h2 > {{ votacion }}</h2>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6"> <h3 >Votos a Favor</h3></div>
+            <div class="span6"> <h3 >Votos en Contra</h3></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6"> <h3 > {{ votosFavor.count }}</h3></div>
+            <div class="span6"> <h3 > {{ votosContra.count }}</h3></div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}
