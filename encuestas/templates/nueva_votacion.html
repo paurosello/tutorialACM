@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    {% if form %}
+    <form  action="/nueva_votacion/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+    {% else %}
+        <h1>Votación creada</h1>
+    {% endif %}
+    <hr>
+{% endblock %}

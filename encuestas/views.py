@@ -25,8 +25,12 @@ def activas(request):
 
 def realizar_voto(request, votacion, voto):
 
-    voto_realizado = Voto(votacion=Votacion.objects.get(pk=votacion), opcion=int(voto)==1)
-    voto_realizado.save()
+    votacion_act = Votacion.objects.get(pk=votacion)
+
+    voto_realizado=None
+    if(votacion_act.activa):
+        voto_realizado = Voto(votacion=votacion_act, opcion=int(voto)==1)
+        voto_realizado.save()
 
     return render_to_response(
         'voto_realizado.html',
@@ -48,3 +52,26 @@ def votacion(request, vot_id):
             'votosContra' : votos.exclude(opcion=True)
         },
     )
+
+
+from django.forms import ModelForm
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Votacion
+        fields = ('titulo', 'activa')
+
+def nueva_votacion(request):
+    contexto = RequestContext(request)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render_to_response("nueva_votacion.html", {
+            })
+    else:
+        form = ArticleForm()
+
+    return render_to_response("nueva_votacion.html", {
+        "form": form,
+        },
+    contexto)

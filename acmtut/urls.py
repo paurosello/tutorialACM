@@ -7,9 +7,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'encuestas.views.inicio', name='inicio'),
-    url(r'^activas$', 'encuestas.views.activas', name='inicio'),
+    url(r'^activas$', 'encuestas.views.activas', name='activas'),
     url(r'^votar/(\d)/(\d)$', 'encuestas.views.realizar_voto'),
     url(r'^votacion/(\d)$', 'encuestas.views.votacion'),
+    url(r'^nueva_votacion/$', 'encuestas.views.nueva_votacion'),
 
     # url(r'^acmtut/', include('acmtut.foo.urls')),
 
